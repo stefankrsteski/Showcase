@@ -15,6 +15,12 @@ html, body {
   overflow: hidden;
 }
 
+#projects-container {
+  transition: opacity 0.4s ease-in-out;
+  opacity: 1;
+}
+
+
 .outer-carousel-track {
   display: flex;
   height: 100%;

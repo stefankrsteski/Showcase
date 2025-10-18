@@ -1,0 +1,82 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #f0f4f8, #d9e2ec);
+  overflow: hidden;
+}
+
+.project-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 80px;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Phone container */
+.phone-container {
+  position: relative;
+  width: 300px;
+  max-width: 35vw;
+}
+
+.carousel-image {
+  width: 100%;
+  border-radius: 45px;
+  object-fit: cover;
+  user-select: none;
+}
+
+.phone-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow.left { left: -20px; }
+.arrow.right { right: -20px; }
+
+.arrow:hover {
+  background: rgba(255,255,255,0.9);
+}
+
+.project-info {
+  flex: 1;
+  max-width: 40vw;
+  color: #102a43;
+}
+
+.project-info h2 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.project-info p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
