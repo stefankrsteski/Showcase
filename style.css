@@ -1,35 +1,44 @@
+/* Global styles */
 body {
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: flex-start;
   margin: 0;
+  padding: 20px;
+  background: #f9f9f9; /* optional background */
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
+/* Container for each project */
+.project {
+  margin-bottom: 50px;
+}
+/* Container for phone + image */
 .phone-container {
   position: relative;
-  width: 300px;    /* match your image width */
-  height: 600px;   /* match your image height */
+  display: inline-block;       
+  margin: 20px auto;
+  max-width: 300px;          /* maximum width of the image */
+  width: 100%;               /* scale down if screen is smaller */
 }
 
+/* Image keeps natural aspect ratio and scales to container */
 .carousel-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 45px;  /* match phone frame corners */
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 100%;                /* fills container width */
+  height: auto;               /* preserves aspect ratio */
+  border-radius: 45px;
+  position: relative;
   z-index: 1;
 }
 
+/* Phone frame stretches to match image */
 .phone-frame {
   position: absolute;
   top: 0;
@@ -37,19 +46,20 @@ h1 {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 2;  /* frame on top */
+  z-index: 2;
 }
 
+/* Navigation arrows */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  background: none;    /* no gray background */
+  background: none;
   color: white;
   border: none;
   cursor: pointer;
-  z-index: 3;          /* above frame */
+  z-index: 3;
 }
 
 .arrow.left { left: 10px; }
