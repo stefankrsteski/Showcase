@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Showcase</title>
+  <title>My Projects Showcase</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+  <div class="outer-carousel-container">
+    <button id="prev-project" class="arrow left"><span class="material-icons">arrow_back_ios_new</span></button>
+    <div id="projects-container" class="outer-carousel-track"></div>
+    <button id="next-project" class="arrow right"><span class="material-icons">arrow_forward_ios</span></button>
+  </div>
 
-<div class="outer-carousel-container">
-  <button class="arrow left" id="prev-project">‹</button>
-  <div class="outer-carousel-track" id="projects-container"></div>
-  <button class="arrow right" id="next-project">›</button>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
