@@ -12,6 +12,14 @@ const img2 = container.querySelector(".img2");
 let topImg = img1;
 let bottomImg = img2;
 
+// Preload all images
+const preloadedImages = images.map(src => {
+  const img = new Image();
+  img.src = src;
+  return img;
+});
+
+// Initialize first image
 topImg.src = images[current];
 topImg.classList.add("active");
 
@@ -23,7 +31,7 @@ function showImage(nextIndex) {
   bottomImg.classList.add("active");
   topImg.classList.remove("active");
 
-  // swap top/bottom
+  // Swap top/bottom
   [topImg, bottomImg] = [bottomImg, topImg];
   current = nextIndex;
 }
