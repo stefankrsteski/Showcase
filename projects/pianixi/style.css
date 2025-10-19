@@ -58,8 +58,8 @@ html, body {
   justify-content: center;
 }
 
-.arrow.left { left: -20px; }
-.arrow.right { right: -20px; }
+.arrow.left { left: 10px; }
+.arrow.right { right: 10px; }
 
 .arrow:hover {
   background: rgba(255,255,255,0.9);

@@ -5,6 +5,7 @@ html, body {
   font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
   background: linear-gradient(120deg, #f0f4f8, #d9e2ec);
+  user-select: none; /* prevent text selection */
 }
 
 /* Outer carousel */
@@ -15,18 +16,18 @@ html, body {
   overflow: hidden;
 }
 
-#projects-container {
-  transition: opacity 0.4s ease-in-out;
-  opacity: 1;
-}
-
-
 .outer-carousel-track {
   display: flex;
   height: 100%;
   transition: transform 0.5s ease-in-out;
 }
 
+#projects-container {
+  transition: opacity 0.4s ease-in-out;
+  opacity: 1;
+}
+
+/* Each project slide */
 .project-slide {
   display: flex;
   flex-shrink: 0;
@@ -39,65 +40,13 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Phone container */
-.phone-container {
-  position: relative;
-  width: 300px;
-  max-width: 35vw;
-  height: auto;
-}
-
-/* Inner carousel images */
-.phone-track {
-  display: flex;
-}
-
-.carousel-image {
-  width: 100%;
-  height: auto;
-  border-radius: 45px;
-  object-fit: cover;
-  user-select: none;
-}
-
-/* Phone frame overlay */
-.phone-frame {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Project description */
-.project-info {
-  flex: 1;
-  max-width: 40vw;
-  color: #102a43;
-}
-
-.project-info h2 {
-  margin-top: 0;
-  font-size: 2.5rem;
-  font-weight: 700;
-}
-
-.project-info p {
-  margin-top: 10px;
-  font-size: 1.3rem;
-  line-height: 1.6;
-}
-
-/* Outer carousel arrows */
 /* Outer carousel arrows */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 3rem;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.5);
   border-radius: 50%;
   color: #102a43;
   border: none;
@@ -108,7 +57,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 0; /* <-- fixes vertical centering */
+  line-height: 0;
   transition: background 0.2s;
 }
 
@@ -119,52 +68,10 @@ html, body {
   background: rgba(255,255,255,1);
 }
 
-/* Inner carousel arrows */
-.phone-container .arrow {
-  font-size: 2rem;
-  color: #102a43;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.6);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 0; /* <-- fixes vertical centering */
-}
-
-.phone-container .arrow:hover {
-  background: rgba(255,255,255,0.9);
-}
-
-
-/* Disable selection on carousel */
-.outer-carousel-container,
-.outer-carousel-track,
-.project-slide,
-.phone-container,
-.carousel-image {
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .project-slide {
     flex-direction: column;
     gap: 40px;
-  }
-
-  .phone-container, .project-info {
-    max-width: 80vw;
-  }
-
-  .project-info h2 {
-    font-size: 2rem;
-  }
-
-  .project-info p {
-    font-size: 1.1rem;
   }
 }

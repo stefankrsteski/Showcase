@@ -1,7 +1,6 @@
 const projectFiles = [
   "projects/blumli/index.html",
-  "projects/pianixi/index.html",
-  "projects/project3/index.html"
+  "projects/pianixi/index.html"
 ];
 
 const container = document.getElementById("projects-container");
