@@ -2,7 +2,8 @@ const images = [
   "images/blumli-1.png",
   "images/blumli-2.png",
   "images/blumli-3.png",
-  "images/blumli-4.png"
+  "images/blumli-4.png",
+  "images/blumli-5.png"
 ];
 
 let current = 0;
@@ -24,6 +25,8 @@ topImg.src = images[current];
 topImg.classList.add("active");
 
 let startX = 0;
+let autoSlideTimer = null;
+const AUTO_SLIDE_DELAY = 5000; // 5 seconds
 
 // Show image with crossfade
 function showImage(nextIndex) {
@@ -34,7 +37,24 @@ function showImage(nextIndex) {
   // Swap top/bottom
   [topImg, bottomImg] = [bottomImg, topImg];
   current = nextIndex;
+
+  // Reset auto-slide timer
+  resetAutoSlide();
 }
+
+// Auto-slide function
+function autoSlide() {
+  showImage((current + 1) % images.length);
+}
+
+// Reset auto-slide timer
+function resetAutoSlide() {
+  if (autoSlideTimer) clearTimeout(autoSlideTimer);
+  autoSlideTimer = setTimeout(autoSlide, AUTO_SLIDE_DELAY);
+}
+
+// Start auto-slide initially
+resetAutoSlide();
 
 // Swipe logic (mouse)
 container.addEventListener("mousedown", e => startX = e.clientX);
