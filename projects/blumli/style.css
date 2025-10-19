@@ -115,6 +115,7 @@ html, body {
 .project-info h2 {
   font-size: 2.5rem;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* Fancy link below title */
