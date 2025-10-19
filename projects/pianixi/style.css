@@ -73,21 +73,6 @@ html, body {
   z-index: 2;
 }
 
-/* Dynamic Island */
-.phone-container::before {
-  content: "";
-  position: absolute;
-  top: 10px;               /* distance from top of phone */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 23px;            /* width of the island */
-  height: 23px;            /* height of the island */
-  border-radius: 16px;     /* pill shape */
-  background: rgba(0,0,0,1); /* black translucent */
-  z-index: 3;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
 /* Swipe hint container */
 .swipe-hint {
   position: absolute;
