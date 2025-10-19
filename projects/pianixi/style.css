@@ -1,12 +1,32 @@
+/* ===== Reset & Base ===== */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(120deg, #f0f4f8, #d9e2ec);
-  overflow: hidden;
+  color: #11293F;
+  background: linear-gradient(to bottom, #dce6ff, #fff, #dce6ff);
+  background-size: 100% 300%; /* make gradient taller than viewport */
+  animation: gradientMove 30s ease-in-out infinite;
+  overflow-x: hidden;
 }
 
+
+@keyframes gradientMove {
+  0% {
+    background-position: 50% 0%;
+  }
+
+  50% {
+    background-position: 50% 100%;
+  }
+
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+/* ===== Layout ===== */
 .project-slide {
   display: flex;
   align-items: center;
@@ -15,68 +35,177 @@ html, body {
   gap: 80px;
   padding: 40px;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
-/* Phone container */
+/* ===== Phone ===== */
 .phone-container {
   position: relative;
   width: 300px;
-  max-width: 35vw;
+  aspect-ratio: 9 / 20;       /* typical phone ratio */
+  border: 6px solid #000;     /* phone border */
+  border-radius: 45px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;          /* prevent selection */
 }
 
 .carousel-image {
-  width: 100%;
-  border-radius: 45px;
-  object-fit: cover;
-  user-select: none;
-}
-
-.phone-frame {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+  pointer-events: none;       /* prevent dragging */
+  transition: opacity 0.6s ease, filter 0.6s ease;
+  opacity: 0;
+  filter: blur(8px);
+}
+
+.carousel-image.active {
+  opacity: 1;
+  filter: blur(0);
   z-index: 2;
-  pointer-events: none;
 }
 
-/* Arrows */
-.arrow {
+/* Dynamic Island */
+.phone-container::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  background: rgba(255,255,255,0.6);
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
+  top: 10px;               /* distance from top of phone */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 23px;            /* width of the island */
+  height: 23px;            /* height of the island */
+  border-radius: 16px;     /* pill shape */
+  background: rgba(0,0,0,1); /* black translucent */
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Swipe hint container */
+.swipe-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  pointer-events: none; /* ignore pointer events */
+  z-index: 4;
+  opacity: 0.8;
+  animation: swipe-hint 4s infinite;
 }
 
-.arrow.left { left: 10px; }
-.arrow.right { right: 10px; }
-
-.arrow:hover {
-  background: rgba(255,255,255,0.9);
+/* Swipe icon */
+.swipe-hint .material-icons {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
 }
 
+/* Horizontal left-right animation */
+@keyframes swipe-hint {
+  0%, 100% { transform: translateX(-50%) translateX(0); }
+  25% { transform: translateX(-50%) translateX(-6px); }
+  50% { transform: translateX(-50%) translateX(6px); }
+  75% { transform: translateX(-50%) translateX(-6px); }
+}
+
+
+/* ===== Text ===== */
 .project-info {
   flex: 1;
-  max-width: 40vw;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   color: #102a43;
+}
+
+.project-info p {
+  text-align: justify; /* justify text on both sides */
 }
 
 .project-info h2 {
   font-size: 2.5rem;
-  margin: 0;
+  margin-bottom: 10px;
 }
 
-.project-info p {
-  font-size: 1.3rem;
-  line-height: 1.6;
+/* Fancy link below title */
+/* Centered modern project link */
+.project-info a.project-link {
+  display: inline-block;
+  margin: 0 auto 20px auto;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #11293F; /* dark text */
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  background: #102a43;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.project-info a.project-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #11293F; /* subtle underline */
+  opacity: 0.7;
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.project-info a.project-link:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.project-info a.project-link:hover {
+  opacity: 0.9;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .project-slide {
+    flex-direction: column;          /* switch to vertical layout */
+    height: auto;
+    min-height: 100vh;
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .phone-container {
+    order: 1;                        /* phone first */
+  }
+
+  .project-info {
+    order: 2;
+    max-width: 90%;
+  }
+
+  .project-info h2 {
+    font-size: 2rem;
+  }
+
+  .project-info p {
+    font-size: 1.1rem;
+  }
 }

@@ -33,18 +33,17 @@ html, body {
 .phone-container {
   position: relative;
   width: 300px;
-  aspect-ratio: 9 / 20; /* typical phone aspect ratio */
-  border: 6px solid #000;
+  aspect-ratio: 9 / 20;       /* typical phone ratio */
+  border: 6px solid #000;     /* phone border */
   border-radius: 45px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;          /* prevent selection */
 }
 
-
-/* Images stack on top of each other for morph fade */
 .carousel-image {
   position: absolute;
   top: 0;
@@ -53,20 +52,17 @@ html, body {
   height: 100%;
   border-radius: 30px;
   object-fit: cover;
-  user-select: none;
+  pointer-events: none;       /* prevent dragging */
+  transition: opacity 0.6s ease, filter 0.6s ease;
   opacity: 0;
-  /*transform: scale(1.05);*/
   filter: blur(8px);
-  transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
 }
 
 .carousel-image.active {
   opacity: 1;
-  /*transform: scale(1);*/
   filter: blur(0);
   z-index: 2;
 }
-
 
 /* Dynamic Island */
 .phone-container::before {
@@ -83,28 +79,36 @@ html, body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-/* Arrows over the image */
-.arrow {
+/* Swipe hint container */
+.swipe-hint {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 5; /* ensure arrows stay above images */
+  color: #fff;
+  font-size: 0.9rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  pointer-events: none; /* ignore pointer events */
+  z-index: 4;
+  opacity: 0.8;
+  animation: swipe-hint 4s infinite;
 }
 
-.arrow.left { left: 10px; }
-.arrow.right { right: 10px; }
+/* Swipe icon */
+.swipe-hint .material-icons {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
 
-.arrow:hover {
-  background: rgba(255, 255, 255, 0.9);
+/* Horizontal left-right animation */
+@keyframes swipe-hint {
+  0%, 100% { transform: translateX(-50%) translateX(0); }
+  25% { transform: translateX(-50%) translateX(-6px); }
+  50% { transform: translateX(-50%) translateX(6px); }
+  75% { transform: translateX(-50%) translateX(-6px); }
 }
 
 
@@ -115,19 +119,58 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: left;
+  text-align: center;
   color: #102a43;
+}
+
+.project-info p {
+  text-align: justify; /* justify text on both sides */
 }
 
 .project-info h2 {
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.project-info p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #1a1a1a;
+/* Fancy link below title */
+/* Centered modern project link */
+.project-info a.project-link {
+  display: inline-block;
+  margin: 0 auto 20px auto;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #11293F; /* dark text */
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  background: #102a43;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.project-info a.project-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #11293F; /* subtle underline */
+  opacity: 0.7;
+  border-radius: 1px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.project-info a.project-link:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.project-info a.project-link:hover {
+  opacity: 0.9;
 }
 
 /* ===== Responsive ===== */
@@ -136,7 +179,6 @@ html, body {
     flex-direction: column;          /* switch to vertical layout */
     height: auto;
     min-height: 100vh;
-    text-align: center;
     gap: 40px;
     padding: 20px;
   }
@@ -148,8 +190,6 @@ html, body {
   .project-info {
     order: 2;
     max-width: 90%;
-    align-items: center;
-    text-align: center;
   }
 
   .project-info h2 {

@@ -1,34 +1,45 @@
+const images = [
+  "images/blumli-1.png",
+  "images/blumli-2.png",
+  "images/blumli-3.png",
+  "images/blumli-4.png"
+];
 
-  const images = ["images/blumli-1.png", "images/blumli-2.png", "images/blumli-3.png", "images/blumli-4.png", "images/blumli-5.png"];
-  let current = 0;
+let current = 0;
+const container = document.querySelector(".phone-container");
+const img1 = container.querySelector(".img1");
+const img2 = container.querySelector(".img2");
+let topImg = img1;
+let bottomImg = img2;
 
-  const container = document.querySelector(".phone-container");
+topImg.src = images[current];
+topImg.classList.add("active");
 
-  // Create image elements for crossfade morph
-  const imageElements = images.map((src, i) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.className = "carousel-image" + (i === 0 ? " active" : "");
-    container.appendChild(img);
-    return img;
-  });
+let startX = 0;
 
-  const prev = document.querySelector(".arrow.left");
-  const next = document.querySelector(".arrow.right");
+// Show image with crossfade
+function showImage(nextIndex) {
+  bottomImg.src = images[nextIndex];
+  bottomImg.classList.add("active");
+  topImg.classList.remove("active");
 
-  function showImage(i) {
-    imageElements.forEach((img, idx) => {
-      img.classList.toggle("active", idx === i);
-    });
-  }
+  // swap top/bottom
+  [topImg, bottomImg] = [bottomImg, topImg];
+  current = nextIndex;
+}
 
-  prev.addEventListener("click", () => {
-    current = (current - 1 + images.length) % images.length;
-    showImage(current);
-  });
+// Swipe logic (mouse)
+container.addEventListener("mousedown", e => startX = e.clientX);
+container.addEventListener("mouseup", e => {
+  const diff = e.clientX - startX;
+  if (diff > 50) showImage((current - 1 + images.length) % images.length);
+  if (diff < -50) showImage((current + 1) % images.length);
+});
 
-  next.addEventListener("click", () => {
-    current = (current + 1) % images.length;
-    showImage(current);
-  });
-
+// Swipe logic (touch)
+container.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+container.addEventListener("touchend", e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (diff > 50) showImage((current - 1 + images.length) % images.length);
+  if (diff < -50) showImage((current + 1) % images.length);
+});
