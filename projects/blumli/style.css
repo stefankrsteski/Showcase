@@ -108,7 +108,7 @@ html, body {
 }
 
 .project-info p {
-  text-align: justify; /* justify text on both sides */
+  text-align: start;
 }
 
 .project-info h2 {
