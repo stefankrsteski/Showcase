@@ -9,14 +9,14 @@ html, body {
 }
 
 /* Outer carousel */
-.outer-carousel-container {
+.project-carousel-container {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
-.outer-carousel-track {
+.project-carousel-track {
   display: flex;
   height: 100%;
   transition: transform 0.5s ease-in-out;
@@ -27,18 +27,6 @@ html, body {
   opacity: 1;
 }
 
-/* Each project slide */
-.project-slide {
-  display: flex;
-  flex-shrink: 0;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  gap: 80px;
-  padding: 40px;
-  box-sizing: border-box;
-}
 
 /* Outer carousel arrows */
 .arrow {
@@ -68,10 +56,3 @@ html, body {
   background: rgba(255,255,255,1);
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .project-slide {
-    flex-direction: column;
-    gap: 40px;
-  }
-}
