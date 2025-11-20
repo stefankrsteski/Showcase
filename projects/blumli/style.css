@@ -168,6 +168,7 @@ html, body {
 }
 
 /* ===== Responsive ===== */
+/* Reorder children inside .project-info for mobile */
 @media (max-width: 900px) {
   .project-slide {
     flex-direction: column;          /* switch to vertical layout */
@@ -184,12 +185,24 @@ html, body {
     order: 2;
     max-width: 90%;
   }
-
+  
+  /* Make .project-info children reorderable */
   .project-info h2 {
-    font-size: 2rem;
+    order: 1;
+	font-size: 2rem;
+  }
+
+  .project-info .play-button-wrapper {
+    order: 2;               /* move right after the header */
+  }
+
+  .project-info a.project-link {
+    order: 3;
+    margin-bottom: 8px;
   }
 
   .project-info p {
+	order: 4;
     font-size: 1.1rem;
   }
 }
